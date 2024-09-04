@@ -1,0 +1,26 @@
+h1 {
+  color: blue;
+}
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+.file-upload {
+  display: flex;
+  align-items: center;
+}
+
+.file-upload button {
+  margin-right: 10px;
+}
+
+.file-upload span {
+  font-size: 14px;
+  color: #666;
+}

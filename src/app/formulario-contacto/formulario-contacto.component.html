@@ -1,0 +1,51 @@
+<h1>{{ translationService.getText('contactForm.title') }}</h1>
+
+<form [formGroup]="formularioContacto" (ngSubmit)="submit()">
+  <div>
+    <label for="email">{{ translationService.getText('contactForm.email') }}</label>
+    <input id="email" formControlName="email" type="email">
+    <div *ngIf="formularioContacto.get('email')?.invalid && formularioContacto.get('email')?.touched">
+      <span *ngIf="formularioContacto.get('email')?.errors?.['required']">{{ translationService.getText('errors.requiredEmail') }}</span>
+      <span *ngIf="formularioContacto.get('email')?.errors?.['email']">{{ translationService.getText('errors.invalidEmail') }}</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="nombres">{{ translationService.getText('contactForm.firstName') }}</label>
+    <input id="nombres" formControlName="nombres">
+    <div *ngIf="formularioContacto.get('nombres')?.invalid && formularioContacto.get('nombres')?.touched">
+      <span *ngIf="formularioContacto.get('nombres')?.errors?.['required']">{{ translationService.getText('errors.requiredFirstName') }}</span>
+      <span *ngIf="formularioContacto.get('nombres')?.hasError('noNumbers')">{{ translationService.getText('errors.noNumbers') }}</span>
+      <span *ngIf="formularioContacto.get('nombres')?.errors?.['pattern']">{{ translationService.getText('errors.pattern') }}</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="apellidos">{{ translationService.getText('contactForm.lastName') }}</label>
+    <input id="apellidos" formControlName="apellidos">
+    <div *ngIf="formularioContacto.get('apellidos')?.invalid && formularioContacto.get('apellidos')?.touched">
+      <span *ngIf="formularioContacto.get('apellidos')?.errors?.['required']">{{ translationService.getText('errors.requiredLastName') }}</span>
+      <span *ngIf="formularioContacto.get('apellidos')?.hasError('noNumbers')">{{ translationService.getText('errors.noNumbers') }}</span>
+      <span *ngIf="formularioContacto.get('apellidos')?.errors?.['pattern']">{{ translationService.getText('errors.pattern') }}</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="comentarios">{{ translationService.getText('contactForm.comments') }}</label>
+    <textarea id="comentarios" formControlName="comentarios"></textarea>
+    <div *ngIf="formularioContacto.get('comentarios')?.invalid && formularioContacto.get('comentarios')?.touched">
+      <span *ngIf="formularioContacto.get('comentarios')?.errors?.['required']">{{ translationService.getText('errors.requiredComments') }}</span>
+      <span *ngIf="formularioContacto.get('comentarios')?.errors?.['pattern']">{{ translationService.getText('errors.invalidPattern') }}</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="adjunto">{{ translationService.getText('contactForm.attached') }}</label>
+    <div class="file-upload">
+      <input #fileInput id="adjunto" type="file" accept=".jpg,.jpeg,.png,.pdf" (change)="onFileChange($event)" hidden>
+      <button type="button" (click)="openFileDialog()">{{ translationService.getText('contactForm.chooseFile') }}</button>
+      <span>{{ fileSelected ? file?.name : translationService.getText('contactForm.noFileChosen') }}</span>
+    </div>
+  </div>
+  <button id="submit" type="submit">{{ translationService.getText('contactForm.submit') }}</button>
+</form>
